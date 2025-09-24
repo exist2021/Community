@@ -1,250 +1,276 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Community Manifesto</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-```
-    body {
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Community Manifesto</title>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
         font-family: 'Georgia', serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #333;
         overflow: hidden;
     }
-
+    body {
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+    }
     .presentation-container {
         width: 100vw;
         height: 100vh;
         position: relative;
     }
+    .logo {
+        position: fixed;
+        top: 0.8rem;
+        left: 1rem;
+        width: 40px;
+        height: 40px;
+        z-index: 1100;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo img {
+        max-width: 36px;
+        max-height: 36px;
+        display: block;
+        border-radius: 6px;
+    }
 
     .slide {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
         display: none;
         justify-content: center;
         align-items: center;
-        padding: 2rem;
         opacity: 0;
         transform: translateX(100px);
-        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+        padding: 0;
     }
-
     .slide.active {
         display: flex;
         opacity: 1;
         transform: translateX(0);
     }
-
+    .slide-content-wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .slide-content {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 3rem;
-        max-width: 900px;
-        width: 100%;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
         position: relative;
-        overflow: hidden;
+        width: 90vw;
+        max-width: 410px;
+        height: 70vh;
+        max-height: 70vh;
+        padding: 1.2rem 1.6rem;
+        text-align: center;
+        overflow-y: auto !important;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
     }
-
     .slide-content::before {
         content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
+        position: absolute; top: 0; left: 0; right: 0;
         height: 4px;
         background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        border-radius: 4px 4px 0 0;
     }
-
-    h1 {
-        font-size: 3rem;
-        color: #2c3e50;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-        font-size: 2.5rem;
-        color: #34495e;
-        margin-bottom: 2rem;
-        font-weight: 600;
-    }
-
-    h3 {
-        font-size: 2rem;
-        color: #e74c3c;
-        margin-bottom: 1.5rem;
-        font-weight: 600;
-    }
-
-    p {
-        font-size: 1.3rem;
-        line-height: 1.6;
-        color: #555;
-        margin-bottom: 1.5rem;
-    }
-
+    h1 { font-size: 2rem; color: #2c3e50; margin-bottom: .8rem; font-weight: bold; }
+    h2 { font-size: 1.4rem; color: #34495e; margin-bottom: 1.2rem; font-weight: 600; }
+    h3 { font-size: 1rem; color: #e74c3c; margin-bottom: 0.9rem; font-weight: 600; }
+    p { font-size: 1rem; line-height: 1.52; color: #555; margin-bottom: .9rem; }
     .quote {
         font-style: italic;
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         color: #2980b9;
-        border-left: 4px solid #3498db;
-        padding-left: 2rem;
-        margin: 2rem 0;
+        border-left: 3px solid #3498db;
+        padding-left: .7rem;
+        margin: 1rem 0;
         text-align: left;
     }
-
-    .comparison-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        margin: 2rem 0;
-    }
-
     .comparison-box {
-        padding: 1.5rem;
-        border-radius: 15px;
+        width: 100%;
+        padding: .7rem 1rem;
+        border-radius: 13px;
         text-align: left;
+        margin-bottom: .7rem;
+        font-size: 1rem;
+        font-weight: 600;
     }
-
     .state-box {
         background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-        color: white;
+        color: #17202a;
     }
-
     .community-box {
         background: linear-gradient(135deg, #4ecdc4, #44bd87);
-        color: white;
+        color: #17202a;
     }
-
+    .community-box h3,
+    .state-box h3 { color: #e74c3c; }
     .wealth-list {
         text-align: left;
-        font-size: 1.2rem;
-        margin: 1rem 0;
+        font-size: .98rem;
+        margin: .6rem 0;
     }
-
     .wealth-list li {
-        margin: 0.8rem 0;
-        padding-left: 1rem;
+        margin: .5rem 0;
+        padding-left: .7rem;
         position: relative;
     }
-
     .wealth-list li::before {
         content: '→';
-        position: absolute;
-        left: 0;
-        color: #3498db;
-        font-weight: bold;
+        position: absolute; left: 0; color: #3498db; font-weight: bold;
     }
-
+    .highlight {
+        background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+        padding: 0.17rem 0.35rem;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.98rem;
+    }
+    .three-communities {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        margin: 1rem 0;
+    }
+    .community-type {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: .8rem;
+        border-radius: 13px;
+        text-align: center;
+        font-size: .95rem;
+    }
+    .community-type h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .credit {
+        font-size: 1rem;
+        color: #555;
+        margin-top: 1rem;
+    }
+    .credit a {
+        color: #2c3e50;
+        font-weight: bold;
+        text-decoration: none;
+    }
     .navigation {
         position: fixed;
-        bottom: 2rem;
         left: 50%;
+        bottom: 1.4rem;
         transform: translateX(-50%);
         display: flex;
-        gap: 1rem;
+        gap: 0.8rem;
         z-index: 1000;
     }
-
     .nav-btn {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255,255,255, 1);
         border: none;
-        padding: 1rem 2rem;
+        padding: 1rem 1.7rem;
         border-radius: 50px;
         cursor: pointer;
         font-size: 1rem;
         font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
-
-    .nav-btn:hover {
-        background: white;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
     .nav-btn:disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
-
     .slide-counter {
         position: fixed;
-        top: 2rem;
-        right: 2rem;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
+        top: 1.1rem;
+        right: 1rem;
+        background: rgba(255,255,255,0.9);
+        padding: 0.35rem .7rem;
+        border-radius: 17px;
         font-weight: 600;
-        z-index: 1000;
+        font-size: .95rem;
+        z-index: 999;
     }
-
-    .highlight {
-        background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-        padding: 0.2rem 0.5rem;
-        border-radius: 5px;
+    @media (min-width:550px) {
+        .slide-content { max-width: 410px; }
+    }
+    @media (max-width:400px) {
+        .slide-content { max-width: 98vw; height: 70vh; max-height: 70vh; }
+        .slide-counter { font-size: .9rem; top: .6rem; }
+        h1 { font-size: 1.1rem; }
+        h2 { font-size: .95rem; }
+        h3 { font-size: .90rem; }
+        .nav-btn { font-size: 0.95rem; padding: .9rem 1.2rem; }
+    }
+    .comparison-box p,
+    .comparison-box h3 {
         font-weight: 600;
     }
-
-    .three-communities {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin: 2rem 0;
+    .support-qr {
+        margin-top: 1rem;
+        max-width: 180px;
+        max-height: 180px;
+        border-radius: 14px;
+        box-shadow: 0 5px 16px rgba(0,0,0,0.15);
+        object-fit: contain;
     }
-
-    .community-type {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 1.5rem;
-        border-radius: 15px;
+    .support-text {
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #2c3e50;
         text-align: center;
-    }
-
-    .community-type h4 {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
+        padding: 0 1rem;
     }
 </style>
-```
-
 </head>
 <body>
-    <div class="presentation-container">
-        <div class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">10</span>
-        </div>
+<div class="presentation-container">
 
-```
-    <!-- Slide 1: Title -->
+    <!-- Logo visible on all slides -->
+    <div class="logo" aria-label="Logo">
+        <img src="https://i.postimg.cc/90yWCJr1/IMG-6747.png" alt="Logo" />
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">13</span>
+    </div>
+
+    <!-- Slides -->
     <div class="slide active">
-        <div class="slide-content">
-            <h1>The Community Manifesto</h1>
-            <p class="quote">"A place where someone thinks of you as one of their own"</p>
-            <p>Moving beyond impersonal systems toward human-centered belonging</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h1>The Community Manifesto</h1>
+                <p class="quote">"A place where someone thinks of you as one of their own"</p>
+                <p>Moving beyond impersonal systems toward human-centered belonging</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 2: The Problem -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>The Crisis of the Impersonal State</h2>
-            <div class="comparison-grid">
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>The Crisis of the Impersonal State</h2>
                 <div class="comparison-box state-box">
                     <h3>The State Sees:</h3>
                     <p>• Credit scores, not circumstances</p>
@@ -252,6 +278,14 @@
                     <p>• Rules, not relationships</p>
                     <p>• Uniformity, not uniqueness</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>The Community Sees...</h2>
                 <div class="comparison-box community-box">
                     <h3>Community Sees:</h3>
                     <p>• Your story and struggles</p>
@@ -263,111 +297,144 @@
         </div>
     </div>
 
-    <!-- Slide 3: Personal Story -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>When Systems Fail People</h2>
-            <p class="quote">"My credit score is around 600... My father died suddenly with a lot of debt, and I carried that debt."</p>
-            <p>The State doesn't see the <span class="highlight">human story</span> behind the numbers.</p>
-            <p>Compare this to oligarchs with massive debt who remain "safe" - revealing the true nature of our "impartial" system.</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>When Systems Fail People</h2>
+                <p class="quote">"My credit score is around 600... My father died suddenly with a lot of debt, and I carried that debt."</p>
+                <p>The State doesn't see the <span class="highlight">human story</span> behind the numbers.</p>
+                <p>Compare this to oligarchs with massive debt who remain "safe" - revealing the true nature of our "impartial" system.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 4: Tragedy Example -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>The Cost of Impersonal Justice</h2>
-            <p class="quote">"A wife killed herself and her toddler child after the court sent her husband to jail."</p>
-            <p>Impartial justice becomes <span class="highlight">inhuman injustice</span> when it ignores the web of dependencies and relationships.</p>
-            <p>A community system like a panchayat would have seen this as a personal case, provided care, and prevented tragedy.</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>The Cost of Impersonal Justice</h2>
+                <p class="quote">"A wife killed herself and her toddler child after the court sent her husband to jail."</p>
+                <p>Impartial justice becomes <span class="highlight">inhuman injustice</span> when it ignores the web of dependencies and relationships.</p>
+                <p>A community system like a panchayat would have seen this as a personal case, provided care, and prevented tragedy.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 5: Local Defense -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>Your First Defense is Local</h2>
-            <p>Physical harm happens in local situations.</p>
-            <p>The military won't come for your daily struggles.</p>
-            <p>Police are local - but <span class="highlight">community protection</span> is immediate.</p>
-            <p class="quote">"You need strong local protection in the form of a community."</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>Your First Defense is Local</h2>
+                <p>Physical harm happens in local situations.</p>
+                <p>The military won't come for your daily struggles.</p>
+                <p>Police are local - but <span class="highlight">community protection</span> is immediate.</p>
+                <p class="quote">"You need strong local protection in the form of a community."</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 6: Redefining Wealth -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>True Community Wealth</h2>
-            <p>Wealth is anything that enhances the life of its people.</p>
-            <ul class="wealth-list">
-                <li>Cultural activity</li>
-                <li>Social connection</li>
-                <li>Walkability and design</li>
-                <li>Reduced loneliness</li>
-            </ul>
-            <p><span class="highlight">Money is just a sense-making tool</span> - not true wealth.</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>True Community Wealth</h2>
+                <p>Wealth is anything that enhances the life of its people.</p>
+                <ul class="wealth-list">
+                    <li>Cultural activity</li>
+                    <li>Social connection</li>
+                    <li>Walkability and design</li>
+                    <li>Reduced loneliness</li>
+                </ul>
+                <p><span class="highlight">Money is just a sense-making tool</span> - not true wealth.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 7: Gatekeepers -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>The Gatekeepers of Community</h2>
-            <p>Women are the gatekeepers because they are valuable community members.</p>
-            <p>The key principle: <span class="highlight">Judge subjectively, not by money</span></p>
-            <p>Welcome people based on their inherent human value, not their bank balance.</p>
-            <p>Maintain vibrancy by allowing new people and ideas to flow in.</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>The Gatekeepers of Community</h2>
+                <p>Women are the gatekeepers because they are valuable community members.</p>
+                <p>The key principle: <span class="highlight">Judge subjectively, not by money</span></p>
+                <p>Welcome people based on their inherent human value, not their bank balance.</p>
+                <p>Maintain vibrancy by allowing new people and ideas to flow in.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Slide 8: Three Communities -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>The Structure of Belonging</h2>
-            <p>Ideally, each person should belong to <span class="highlight">three communities</span>:</p>
-            <div class="three-communities">
-                <div class="community-type">
-                    <h4>Local</h4>
-                    <p>Geographic proximity and shared space</p>
-                </div>
-                <div class="community-type">
-                    <h4>Idea-Based</h4>
-                    <p>Shared values and beliefs</p>
-                </div>
-                <div class="community-type">
-                    <h4>Vocation-Based</h4>
-                    <p>Shared skills and professional interests</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>The Structure of Belonging</h2>
+                <p>Ideally, each person should belong to <span class="highlight">three communities</span>:</p>
+                <div class="three-communities">
+                    <div class="community-type">
+                        <h4>Local</h4>
+                        <p>Geographic proximity and shared space</p>
+                    </div>
+                    <div class="community-type">
+                        <h4>Idea-Based</h4>
+                        <p>Shared values and beliefs</p>
+                    </div>
+                    <div class="community-type">
+                        <h4>Vocation-Based</h4>
+                        <p>Shared skills and professional interests</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 9: Internal Management -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>Managing Internal Challenges</h2>
-            <div class="comparison-grid">
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>Managing Internal Challenges</h2>
                 <div class="comparison-box community-box">
                     <h3>Exit Strategy</h3>
                     <p>Help members transition to communities that better fit them</p>
                 </div>
+                <p>Create systems that improve conditions rather than exclude people.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide">
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>Managing Internal Challenges</h2>
                 <div class="comparison-box state-box">
                     <h3>Tolerance</h3>
                     <p>Support unproductive members today so they can be productive tomorrow</p>
                 </div>
+                <p>Create systems that improve conditions rather than exclude people.</p>
             </div>
-            <p>Create systems that improve conditions rather than exclude people.</p>
         </div>
     </div>
 
-    <!-- Slide 10: Call to Action -->
     <div class="slide">
-        <div class="slide-content">
-            <h2>Building the Structures of Belonging</h2>
-            <p class="quote">"It is time to build these vibrant, protective structures to ensure a better, wealthier life for all."</p>
-            <p>Stop measuring success by GDP and credit scores.</p>
-            <p>Start building <span class="highlight">local, personal, subjective systems</span> of belonging.</p>
-            <p>Return to communities where people see you as <span class="highlight">one of their own</span>.</p>
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>Building the Structures of Belonging</h2>
+                <p class="quote">"It is time to build these vibrant, protective structures to ensure a better, wealthier life for all."</p>
+                <p>Stop measuring success by GDP and credit scores.</p>
+                <p>Start building <span class="highlight">local, personal, subjective systems</span> of belonging.</p>
+                <p>Return to communities where people see you as <span class="highlight">one of their own</span>.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-content-wrapper">
+            <div class="slide-content">
+                <h2>Credits</h2>
+                <p class="credit">
+                    This presentation was created by <br>
+                    <a href="https://manojnayak.com" target="_blank">Manoj Nayak</a>
+                </p>
+                <div>
+                    <img class="support-qr" src="https://i.postimg.cc/ZK9RDxb9/IMG-7172.jpg" alt="Support QR Code" />
+                </div>
+                <p class="support-text">
+                    You can support content creation by scanning the QR code above. Thank you!
+                </p>
+            </div>
         </div>
     </div>
 
@@ -414,24 +481,14 @@
         }
     }
 
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') changeSlide(-1);
         if (e.key === 'ArrowRight') changeSlide(1);
     });
 
-    // Initialize
-    updateNavButtons();
-    updateSlideCounter();
-
-    // Auto-advance for demo (remove if not desired)
-    // setInterval(() => {
-    //     if (currentSlide < totalSlides - 1) {
-    //         changeSlide(1);
-    //     }
-    // }, 8000);
+    window.onload = function () {
+        showSlide(currentSlide);
+    };
 </script>
-```
-
 </body>
 </html>
