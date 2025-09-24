@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Community Manifesto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Georgia', serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        overflow: hidden;
+    }
+
+    .presentation-container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+    }
+
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide.active {
+        display: flex;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .slide-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 3rem;
+        max-width: 900px;
+        width: 100%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slide-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+    }
+
+    h1 {
+        font-size: 3rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        color: #34495e;
+        margin-bottom: 2rem;
+        font-weight: 600;
+    }
+
+    h3 {
+        font-size: 2rem;
+        color: #e74c3c;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 1.3rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 1.5rem;
+    }
+
+    .quote {
+        font-style: italic;
+        font-size: 1.4rem;
+        color: #2980b9;
+        border-left: 4px solid #3498db;
+        padding-left: 2rem;
+        margin: 2rem 0;
+        text-align: left;
+    }
+
+    .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+
+    .comparison-box {
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: left;
+    }
+
+    .state-box {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+    }
+
+    .community-box {
+        background: linear-gradient(135deg, #4ecdc4, #44bd87);
+        color: white;
+    }
+
+    .wealth-list {
+        text-align: left;
+        font-size: 1.2rem;
+        margin: 1rem 0;
+    }
+
+    .wealth-list li {
+        margin: 0.8rem 0;
+        padding-left: 1rem;
+        position: relative;
+    }
+
+    .wealth-list li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: #3498db;
+        font-weight: bold;
+    }
+
+    .navigation {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1rem;
+        z-index: 1000;
+    }
+
+    .nav-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-btn:hover {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .slide-counter {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-weight: 600;
+        z-index: 1000;
+    }
+
+    .highlight {
+        background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+        padding: 0.2rem 0.5rem;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+
+    .three-communities {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .community-type {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .community-type h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">10</span>
+        </div>
+
+```
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content">
+            <h1>The Community Manifesto</h1>
+            <p class="quote">"A place where someone thinks of you as one of their own"</p>
+            <p>Moving beyond impersonal systems toward human-centered belonging</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Crisis of the Impersonal State</h2>
+            <div class="comparison-grid">
+                <div class="comparison-box state-box">
+                    <h3>The State Sees:</h3>
+                    <p>• Credit scores, not circumstances</p>
+                    <p>• Numbers, not people</p>
+                    <p>• Rules, not relationships</p>
+                    <p>• Uniformity, not uniqueness</p>
+                </div>
+                <div class="comparison-box community-box">
+                    <h3>Community Sees:</h3>
+                    <p>• Your story and struggles</p>
+                    <p>• Your inherent worth</p>
+                    <p>• Context and compassion</p>
+                    <p>• Individual contributions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Personal Story -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>When Systems Fail People</h2>
+            <p class="quote">"My credit score is around 600... My father died suddenly with a lot of debt, and I carried that debt."</p>
+            <p>The State doesn't see the <span class="highlight">human story</span> behind the numbers.</p>
+            <p>Compare this to oligarchs with massive debt who remain "safe" - revealing the true nature of our "impartial" system.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Tragedy Example -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Cost of Impersonal Justice</h2>
+            <p class="quote">"A wife killed herself and her toddler child after the court sent her husband to jail."</p>
+            <p>Impartial justice becomes <span class="highlight">inhuman injustice</span> when it ignores the web of dependencies and relationships.</p>
+            <p>A community system like a panchayat would have seen this as a personal case, provided care, and prevented tragedy.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Local Defense -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Your First Defense is Local</h2>
+            <p>Physical harm happens in local situations.</p>
+            <p>The military won't come for your daily struggles.</p>
+            <p>Police are local - but <span class="highlight">community protection</span> is immediate.</p>
+            <p class="quote">"You need strong local protection in the form of a community."</p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Redefining Wealth -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>True Community Wealth</h2>
+            <p>Wealth is anything that enhances the life of its people.</p>
+            <ul class="wealth-list">
+                <li>Cultural activity</li>
+                <li>Social connection</li>
+                <li>Walkability and design</li>
+                <li>Reduced loneliness</li>
+            </ul>
+            <p><span class="highlight">Money is just a sense-making tool</span> - not true wealth.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Gatekeepers -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Gatekeepers of Community</h2>
+            <p>Women are the gatekeepers because they are valuable community members.</p>
+            <p>The key principle: <span class="highlight">Judge subjectively, not by money</span></p>
+            <p>Welcome people based on their inherent human value, not their bank balance.</p>
+            <p>Maintain vibrancy by allowing new people and ideas to flow in.</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Three Communities -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Structure of Belonging</h2>
+            <p>Ideally, each person should belong to <span class="highlight">three communities</span>:</p>
+            <div class="three-communities">
+                <div class="community-type">
+                    <h4>Local</h4>
+                    <p>Geographic proximity and shared space</p>
+                </div>
+                <div class="community-type">
+                    <h4>Idea-Based</h4>
+                    <p>Shared values and beliefs</p>
+                </div>
+                <div class="community-type">
+                    <h4>Vocation-Based</h4>
+                    <p>Shared skills and professional interests</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Internal Management -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Managing Internal Challenges</h2>
+            <div class="comparison-grid">
+                <div class="comparison-box community-box">
+                    <h3>Exit Strategy</h3>
+                    <p>Help members transition to communities that better fit them</p>
+                </div>
+                <div class="comparison-box state-box">
+                    <h3>Tolerance</h3>
+                    <p>Support unproductive members today so they can be productive tomorrow</p>
+                </div>
+            </div>
+            <p>Create systems that improve conditions rather than exclude people.</p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Call to Action -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Building the Structures of Belonging</h2>
+            <p class="quote">"It is time to build these vibrant, protective structures to ensure a better, wealthier life for all."</p>
+            <p>Stop measuring success by GDP and credit scores.</p>
+            <p>Start building <span class="highlight">local, personal, subjective systems</span> of belonging.</p>
+            <p>Return to communities where people see you as <span class="highlight">one of their own</span>.</p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">Previous</button>
+        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    document.getElementById('total-slides').textContent = totalSlides;
+
+    function updateSlideCounter() {
+        document.getElementById('current-slide').textContent = currentSlide + 1;
+    }
+
+    function updateNavButtons() {
+        document.getElementById('prev-btn').disabled = currentSlide === 0;
+        document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+    }
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                setTimeout(() => {
+                    slide.classList.add('active');
+                }, 100);
+            }
+        });
+        updateSlideCounter();
+        updateNavButtons();
+    }
+
+    function changeSlide(direction) {
+        const newSlide = currentSlide + direction;
+        if (newSlide >= 0 && newSlide < totalSlides) {
+            currentSlide = newSlide;
+            showSlide(currentSlide);
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    // Initialize
+    updateNavButtons();
+    updateSlideCounter();
+
+    // Auto-advance for demo (remove if not desired)
+    // setInterval(() => {
+    //     if (currentSlide < totalSlides - 1) {
+    //         changeSlide(1);
+    //     }
+    // }, 8000);
+</script>
+```
+
+</body>
+</html>
